@@ -2,6 +2,8 @@
 #=============================================================================
 # BBR v3 终极优化脚本 - Ultimate Edition
 # 功能：结合 XanMod 官方内核的稳定性 + 专业队列算法调优
+# [本地修改 2026-09-21] 官方内核优先版：一键优化(66)不再安装 XanMod 第三方内核，
+#   直接使用系统官方内核启用 BBR；菜单选项1标注慎用。与上游在此处存在刻意差异。
 # 特点：安全性 + 性能 双优化
 #=============================================================================
 # 版本管理规则：
@@ -6371,8 +6373,8 @@ one_click_optimize() {
         xanmod_running=1
     fi
 
-    if [ $xanmod_running -eq 0 ]; then
-        # ===== 阶段1：安装内核 =====
+    if false; then  # [本地修改] 官方内核优先：不再强制安装 XanMod
+        # ===== 阶段1：安装内核（已停用） =====
         echo -e "${gl_huang}▶ 阶段 1/2：安装 XanMod + BBR v3 内核${gl_bai}"
         echo ""
         echo "安装完成后需要重启服务器"
@@ -6391,7 +6393,7 @@ one_click_optimize() {
         fi
     else
         # ===== 阶段2：全自动优化 =====
-        echo -e "${gl_lv}✅ 检测到 XanMod 内核已运行：$(uname -r)${gl_bai}"
+        echo -e "${gl_lv}✅ 使用当前官方内核：$(uname -r)${gl_bai}"
         echo ""
         echo -e "${gl_huang}▶ 阶段 2/2：全自动网络优化${gl_bai}"
         echo "将依次执行："
@@ -6459,11 +6461,11 @@ show_main_menu() {
     echo ""
     echo -e "${gl_kjlan}━━━━━━━━━━━━ 核心功能 ━━━━━━━━━━━━${gl_bai}"
     echo -e "${gl_kjlan}[内核管理]${gl_bai}"
-    echo "1. 安装/更新 XanMod 内核 + BBR v3 ⭐ 推荐"
+    echo "1. 安装/更新 XanMod 内核 + BBR v3（第三方内核·慎用）"
     echo "2. 卸载 XanMod 内核"
     echo ""
     echo -e "${gl_kjlan}[BBR/网络优化]${gl_bai}"
-    echo "3. BBR 直连/落地优化（智能带宽检测）⭐ 推荐"
+    echo "3. BBR 直连/落地优化（官方内核·智能带宽检测）⭐ 推荐"
     echo -e "4. ${gl_hui}已移除（功能3已覆盖MTU智能探测）${gl_bai}"
     echo "5. NS论坛-DNS净化（抗污染/驯服DHCP）"
     echo "6. Realm转发timeout修复 ⭐ 推荐"
@@ -6513,7 +6515,7 @@ show_main_menu() {
     echo "33. 端口流量计费与到期管理 🆕"
     echo ""
     echo -e "${gl_kjlan}━━━━━━━━━ 一键优化 ━━━━━━━━━${gl_bai}"
-    echo "66. ⭐ 一键全自动优化 (BBR v3 + 网络调优)"
+    echo "66. ⭐ 一键全自动优化 (官方内核 BBR + 网络调优)"
     echo ""
     echo -e "${gl_hong}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${gl_bai}"
     echo -e "${gl_hong}99. 完全卸载脚本（卸载所有内容）${gl_bai}"
